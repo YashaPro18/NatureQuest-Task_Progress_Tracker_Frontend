@@ -1,0 +1,22 @@
+/* DailyStats.css */
+
+.daily-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  height: 100%;
+  align-content: start;
+}
+
+@media (max-width: 640px) {
+  .daily-stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .daily-stats-grid {
+    grid-template-columns: 1fr;
+  }
+}

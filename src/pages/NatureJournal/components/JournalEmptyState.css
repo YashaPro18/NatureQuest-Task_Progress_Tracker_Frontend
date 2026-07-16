@@ -1,0 +1,73 @@
+.journal-empty-state {
+  text-align: center;
+  padding: 80px 20px;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(10px);
+  border-radius: 32px;
+  margin: 40px 0;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  animation: fadeUp 0.5s ease-out;
+}
+
+.journal-empty-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 24px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.journal-empty-icon svg {
+  width: 48px;
+  height: 48px;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.journal-empty-state h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 12px;
+}
+
+.journal-empty-state p {
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 28px;
+  font-size: 14px;
+}
+
+.journal-empty-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 32px;
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+  border: none;
+  border-radius: 40px;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 16px rgba(34, 197, 94, 0.3);
+}
+
+.journal-empty-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(34, 197, 94, 0.4);
+}
+
+.journal-empty-cta svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.2s ease;
+}
+
+.journal-empty-cta:hover svg {
+  transform: translateX(4px);
+}

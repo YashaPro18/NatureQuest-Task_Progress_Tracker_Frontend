@@ -1,0 +1,75 @@
+/* src/pages/TaskManager/components/TaskList.css */
+.task-list-glass {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 4px 0;
+  max-height: 500px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.task-list-glass::-webkit-scrollbar {
+  width: 4px;
+}
+
+.task-list-glass::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 40px;
+}
+
+.task-list-glass::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 40px;
+}
+
+.task-list-empty-glass {
+  text-align: center;
+  padding: 60px 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.empty-state-icon {
+  font-size: 48px;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.task-list-empty-glass h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 8px;
+}
+
+.task-list-empty-glass p {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 14px;
+  margin: 0 0 16px 0;
+}
+
+.empty-state-decoration {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.decoration-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  animation: dotPulse 1.5s ease-in-out infinite;
+}
+
+.decoration-dot:nth-child(1) { animation-delay: 0s; }
+.decoration-dot:nth-child(2) { animation-delay: 0.3s; }
+.decoration-dot:nth-child(3) { animation-delay: 0.6s; }
+
+@keyframes dotPulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.3); }
+}

@@ -1,0 +1,79 @@
+/* StatCard.css (FIXED) */
+
+.stat-card-glass {
+  background: rgba(255, 255, 255, 0.13);
+  backdrop-filter: blur(20px) saturate(1.8);
+  -webkit-backdrop-filter: blur(20px) saturate(1.8);
+  border-radius: 24px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.3s ease;
+  min-width: 0;
+  /* ─── FIX: Force GPU layer ─── */
+  will-change: transform, backdrop-filter;   /* ADDED */
+  transform: translateZ(0);                 /* ADDED */
+}
+
+.stat-card-glass:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+}
+
+.stat-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stat-card-icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.stat-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stat-card-value {
+  font-family: 'Syne', sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.2;
+}
+
+.stat-card-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 640px) {
+  .stat-card-glass {
+    padding: 14px 16px;
+  }
+  .stat-card-value {
+    font-size: 22px;
+  }
+  .stat-card-icon {
+    width: 40px;
+    height: 40px;
+  }
+  .stat-card-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+}

@@ -1,0 +1,74 @@
+.achievement-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 14px 16px;
+  transition: all 0.3s ease;
+  animation: cardGlowIn 0.4s ease backwards;
+}
+
+.achievement-card:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(251, 191, 36, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(251, 191, 36, 0.08);
+}
+
+@keyframes cardGlowIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.achievement-card-icon {
+  font-size: 28px;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 14px;
+  transition: transform 0.3s ease;
+}
+
+.achievement-card:hover .achievement-card-icon {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+.achievement-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.achievement-card-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.achievement-card-description {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 480px) {
+  .achievement-card {
+    padding: 12px 14px;
+  }
+  .achievement-card-icon {
+    font-size: 24px;
+    width: 38px;
+    height: 38px;
+  }
+}

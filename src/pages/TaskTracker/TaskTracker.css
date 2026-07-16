@@ -1,0 +1,1055 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&display=swap');
+
+/* ─────────────────────────────────────────────
+   LAYOUT
+───────────────────────────────────────────── */
+.tt-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 20px;
+  align-items: start;
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* ─────────────────────────────────────────────
+   MAIN PANEL — Nature Glass
+   Key insight: layered borders simulate depth.
+   Top/left bright = light source.
+   Right/bottom dim = shadow side.
+   Inner box-shadow = subsurface scattering glow.
+───────────────────────────────────────────── */
+.tt-panel {
+  background: rgba(255, 255, 255, 0.13);
+  backdrop-filter: blur(24px) saturate(2);
+  -webkit-backdrop-filter: blur(24px) saturate(2);
+
+  border-top:    1px solid rgba(255, 255, 255, 0.55);
+  border-left:   1px solid rgba(255, 255, 255, 0.35);
+  border-right:  1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 28px;
+  padding: 28px;
+
+  box-shadow:
+    0 2px 0 rgba(255, 255, 255, 0.28) inset,   /* top light streak */
+    0 -1px 0 rgba(0,0,0,0.04) inset,
+    0 24px 64px rgba(0, 0, 0, 0.18),
+    0 4px 16px rgba(0, 0, 0, 0.1);
+
+  animation: panelEnter 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes panelEnter {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─────────────────────────────────────────────
+   HEADER
+───────────────────────────────────────────── */
+.tt-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.tt-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.tt-eyebrow {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.tt-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.97);
+  line-height: 1.15;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  margin: 0;
+}
+
+.tt-header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Manage Tasks — primary CTA */
+.tt-manage-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  height: 38px;
+  padding: 0 16px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #15803d, #22c55e);
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  letter-spacing: 0.02em;
+  box-shadow:
+    0 4px 16px rgba(34, 197, 94, 0.35),
+    0 1px 0 rgba(255,255,255,0.2) inset;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.tt-manage-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(34, 197, 94, 0.45);
+}
+
+/* History — secondary */
+.tt-history-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  height: 38px;
+  padding: 0 14px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 12px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 13px;
+  font-weight: 500;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.tt-history-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: white;
+  transform: translateY(-1px);
+}
+
+/* Completion ring */
+.tt-ring-wrap {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+.tt-ring-pct {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  color: #4ade80;
+  text-shadow: 0 0 10px rgba(74,222,128,0.5);
+}
+
+/* ─────────────────────────────────────────────
+   PROGRESS SECTION
+───────────────────────────────────────────── */
+.tt-progress-section {
+  padding: 18px 20px;
+  border-radius: 18px;
+  background: rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tt-progress-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.tt-progress-label {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 400;
+  font-style: italic;
+}
+
+.tt-progress-stage {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #4ade80;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-shadow: 0 0 10px rgba(74,222,128,0.4);
+  white-space: nowrap;
+}
+
+.tt-stage-dot {
+  width: 6px;
+  height: 6px;
+  background: #4ade80;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(74,222,128,0.9);
+  animation: stagePulse 2.4s ease infinite;
+}
+
+@keyframes stagePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.75); }
+}
+
+.tt-progress-track {
+  width: 100%;
+  height: 7px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.tt-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #15803d, #22c55e, #4ade80);
+  border-radius: 999px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 12px rgba(74,222,128,0.55);
+}
+
+/* Stage pips */
+.tt-pips {
+  display: flex;
+  gap: 4px;
+}
+
+.tt-pip {
+  flex: 1;
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tt-pip--filled {
+  background: linear-gradient(90deg, #22c55e, #4ade80);
+  box-shadow: 0 0 5px rgba(74,222,128,0.5);
+}
+
+/* ─────────────────────────────────────────────
+   STATS STRIP
+───────────────────────────────────────────── */
+.tt-stats-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 0;
+  margin-bottom: 16px;
+  border-top:    1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.tt-stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.tt-stat-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.2);
+}
+
+.tt-stat-num--green { color: #4ade80; text-shadow: 0 0 14px rgba(74,222,128,0.4); }
+.tt-stat-num--amber { color: #fbbf24; text-shadow: 0 0 12px rgba(251,191,36,0.3); }
+
+.tt-stat-lbl {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.tt-stat-sep {
+  width: 1px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* ─────────────────────────────────────────────
+   FILTER TABS
+───────────────────────────────────────────── */
+.tt-filters {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+  padding: 4px;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.tt-filter-tab {
+  flex: 1;
+  height: 36px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12.5px;
+  font-weight: 500;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.tt-filter-tab:hover {
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.tt-filter-tab--active {
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+/* ─────────────────────────────────────────────
+   TASK LIST
+───────────────────────────────────────────── */
+.tt-task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 80px;
+}
+
+/* ─── Individual Task Card ─── */
+.tt-task {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  transition: all 0.22s ease;
+  position: relative;
+  overflow: hidden;
+  animation: taskSlideIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes taskSlideIn {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.tt-task:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.28);
+  transform: translateX(3px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+}
+
+.tt-task--done {
+  background: rgba(34, 197, 94, 0.08);
+  border-color: rgba(74, 222, 128, 0.2);
+}
+
+.tt-task--done:hover {
+  background: rgba(34, 197, 94, 0.13);
+  border-color: rgba(74, 222, 128, 0.35);
+}
+
+/* Priority stripe — left edge color */
+.tt-task-stripe {
+  position: absolute;
+  left: 0;
+  top: 10px;
+  bottom: 10px;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  opacity: 0.75;
+  transition: opacity 0.2s;
+}
+
+.tt-task:hover .tt-task-stripe { opacity: 1; }
+.tt-task--done .tt-task-stripe { opacity: 0.35; }
+
+/* Checkbox */
+.tt-check-wrap {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.tt-check-input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  width: 0;
+  height: 0;
+}
+
+.tt-checkmark {
+  width: 22px;
+  height: 22px;
+  border-radius: 7px;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.tt-checkmark--done {
+  background: linear-gradient(135deg, #15803d, #22c55e);
+  border-color: #22c55e;
+  box-shadow: 0 2px 12px rgba(34, 197, 94, 0.4);
+}
+
+/* Task body */
+.tt-task-body {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.tt-task-title {
+  flex: 1;
+  font-size: 14.5px;
+  font-weight: 450;
+  color: rgba(255, 255, 255, 0.88);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.18);
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: all 0.2s ease;
+}
+
+.tt-task--done .tt-task-title {
+  text-decoration: line-through;
+  color: rgba(255, 255, 255, 0.38);
+}
+
+/* Priority pill */
+.tt-priority-pill {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 3px 9px;
+  border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: opacity 0.2s;
+}
+
+.tt-task--done .tt-priority-pill { opacity: 0.4; }
+
+/* Done badge */
+.tt-task-done-badge {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: rgba(74,222,128,0.12);
+  border: 1px solid rgba(74,222,128,0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ─────────────────────────────────────────────
+   EMPTY STATE
+───────────────────────────────────────────── */
+.tt-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 44px 20px;
+  gap: 10px;
+  text-align: center;
+}
+
+.tt-empty-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+
+.tt-empty-icon--green {
+  background: rgba(74,222,128,0.08);
+  border-color: rgba(74,222,128,0.2);
+}
+
+.tt-empty-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+}
+
+.tt-empty-sub {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.42);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.tt-empty-sub strong {
+  color: rgba(255, 255, 255, 0.65);
+  font-weight: 600;
+}
+
+.tt-empty-cta {
+  margin-top: 6px;
+  height: 40px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #15803d, #22c55e);
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(34,197,94,0.35);
+  transition: all 0.2s ease;
+}
+
+.tt-empty-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(34,197,94,0.45);
+}
+
+/* ─────────────────────────────────────────────
+   ALL DONE BANNER
+───────────────────────────────────────────── */
+.tt-all-done {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+  padding: 14px 18px;
+  border-radius: 16px;
+  background: rgba(34,197,94,0.12);
+  border: 1px solid rgba(74,222,128,0.3);
+  overflow: hidden;
+  animation: bannerFade 0.5s ease both;
+}
+
+@keyframes bannerFade {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.tt-all-done-glow {
+  position: absolute;
+  left: -40px;
+  top: -40px;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(74,222,128,0.2) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.tt-all-done span {
+  font-size: 13px;
+  color: #4ade80;
+  font-weight: 500;
+  text-shadow: 0 0 12px rgba(74,222,128,0.35);
+}
+
+/* ─────────────────────────────────────────────
+   TREE COLUMN
+───────────────────────────────────────────── */
+.tt-tree-col {
+  display: flex;
+  justify-content: flex-start;
+  animation: panelEnter 0.5s 0.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ─────────────────────────────────────────────
+   SKELETON LOADER
+───────────────────────────────────────────── */
+.tt-panel--skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.sk-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.sk-block {
+  border-radius: 10px;
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.05) 25%,
+    rgba(255,255,255,0.12) 50%,
+    rgba(255,255,255,0.05) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.sk-title  { width: 180px; height: 32px; border-radius: 8px; }
+.sk-badge  { width: 44px;  height: 44px; border-radius: 50%; }
+.sk-progress { width: 100%; height: 70px; border-radius: 14px; }
+.sk-task   { width: 100%; height: 52px; }
+.sk-tree   { width: 310px; height: 480px; border-radius: 28px; }
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────────── */
+
+/* Laptop / medium desktop */
+@media (max-width: 1280px) {
+  .tt-layout {
+    grid-template-columns: 1fr 290px;
+    gap: 16px;
+  }
+}
+
+/* Tablet landscape — stack tree below */
+@media (max-width: 1024px) {
+  .tt-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .tt-tree-col {
+    justify-content: center;
+  }
+}
+
+/* Tablet portrait */
+@media (max-width: 768px) {
+  .tt-panel {
+    padding: 22px 18px;
+    border-radius: 22px;
+  }
+
+  .tt-title {
+    font-size: 22px;
+  }
+
+  .tt-header {
+    gap: 12px;
+  }
+
+  .tt-header-right {
+    gap: 8px;
+  }
+
+  .tt-manage-btn,
+  .tt-history-btn {
+    height: 36px;
+    font-size: 12px;
+    padding: 0 12px;
+  }
+
+  .tt-stat-num {
+    font-size: 24px;
+  }
+
+  .tt-filter-tab {
+    font-size: 11.5px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .tt-panel {
+    padding: 18px 14px;
+    border-radius: 20px;
+  }
+
+  .tt-title {
+    font-size: 20px;
+  }
+
+  .tt-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .tt-header-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .tt-manage-btn {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .tt-history-btn {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .tt-stats-strip {
+    padding: 12px 0;
+  }
+
+  .tt-stat-num {
+    font-size: 22px;
+  }
+
+  .tt-task {
+    padding: 12px 14px;
+  }
+
+  .tt-task-title {
+    font-size: 13.5px;
+  }
+
+  .tt-priority-pill {
+    display: none; /* Hide on very small screens to prevent overflow */
+  }
+
+  .tt-progress-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .tt-filters {
+    gap: 4px;
+  }
+
+  .tt-filter-tab {
+    font-size: 11px;
+    padding: 0 4px;
+  }
+}
+
+/* Ultrawide — cap max width */
+@media (min-width: 1600px) {
+  .tt-layout {
+    grid-template-columns: 1fr 340px;
+    gap: 28px;
+  }
+
+  .tt-title {
+    font-size: 30px;
+  }
+
+  .tt-stat-num {
+    font-size: 32px;
+  }
+}
+
+/* ─── Confirmation Modal ─── */
+.tt-confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: overlayFade 0.25s ease;
+}
+
+@keyframes overlayFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.tt-confirm-dialog {
+  background: rgba(255, 255, 255, 0.13);
+  backdrop-filter: blur(24px);
+  border-radius: 32px;
+  padding: 32px;
+  max-width: 420px;
+  width: 90%;
+  border-top: 1px solid rgba(255, 255, 255, 0.45);
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
+  animation: dialogSlide 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes dialogSlide {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.tt-confirm-icon {
+  font-size: 44px;
+  text-align: center;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.tt-confirm-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
+  text-align: center;
+  margin: 0 0 8px 0;
+}
+
+.tt-confirm-text {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.65);
+  text-align: center;
+  line-height: 1.5;
+  margin: 0 0 24px 0;
+}
+
+.tt-confirm-text strong {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+}
+
+.tt-confirm-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.tt-confirm-btn {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.tt-confirm-btn.cancel {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tt-confirm-btn.cancel:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.tt-confirm-btn.confirm {
+  background: linear-gradient(135deg, #15803d, #22c55e);
+  color: white;
+  box-shadow: 0 4px 16px rgba(34, 197, 94, 0.35);
+}
+
+.tt-confirm-btn.confirm:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(34, 197, 94, 0.45);
+}
+
+@media (max-width: 480px) {
+  .tt-confirm-dialog {
+    padding: 24px;
+  }
+  .tt-confirm-title {
+    font-size: 20px;
+  }
+  .tt-confirm-text {
+    font-size: 13px;
+  }
+}
+
+/* ─── Confirmation Modal ─── */
+.tt-confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: overlayFade 0.25s ease;
+}
+
+@keyframes overlayFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.tt-confirm-dialog {
+  background: rgba(255, 255, 255, 0.13);
+  backdrop-filter: blur(24px);
+  border-radius: 32px;
+  padding: 32px;
+  max-width: 420px;
+  width: 90%;
+  border-top: 1px solid rgba(255, 255, 255, 0.45);
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
+  animation: dialogSlide 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes dialogSlide {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.tt-confirm-icon {
+  font-size: 44px;
+  text-align: center;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.tt-confirm-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
+  text-align: center;
+  margin: 0 0 8px 0;
+}
+
+.tt-confirm-text {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.65);
+  text-align: center;
+  line-height: 1.5;
+  margin: 0 0 24px 0;
+}
+
+.tt-confirm-text strong {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+}
+
+.tt-confirm-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.tt-confirm-btn {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.tt-confirm-btn.cancel {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tt-confirm-btn.cancel:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.tt-confirm-btn.confirm {
+  background: linear-gradient(135deg, #15803d, #22c55e);
+  color: white;
+  box-shadow: 0 4px 16px rgba(34, 197, 94, 0.35);
+}
+
+.tt-confirm-btn.confirm:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(34, 197, 94, 0.45);
+}
+
+/* Uncomplete variant – different button color */
+.tt-confirm-btn.confirm-uncomplete {
+  background: linear-gradient(135deg, #b45309, #f59e0b);
+  color: white;
+  box-shadow: 0 4px 16px rgba(245, 158, 11, 0.35);
+}
+
+.tt-confirm-btn.confirm-uncomplete:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(245, 158, 11, 0.45);
+}
+
+@media (max-width: 480px) {
+  .tt-confirm-dialog {
+    padding: 24px;
+  }
+  .tt-confirm-title {
+    font-size: 20px;
+  }
+  .tt-confirm-text {
+    font-size: 13px;
+  }
+}

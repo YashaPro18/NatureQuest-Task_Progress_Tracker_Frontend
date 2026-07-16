@@ -1,0 +1,72 @@
+/* src/pages/TaskManager/components/TaskFilter.css */
+.task-filter-glass {
+  display: flex;
+  gap: 8px;
+  padding: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 40px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.task-filter-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  border-radius: 32px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.task-filter-btn:hover {
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.task-filter-btn.active {
+  background: rgba(34, 197, 94, 0.2);
+  color: #4ade80;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.filter-icon {
+  font-size: 14px;
+}
+
+.task-filter-count {
+  font-size: 11px;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 2px 8px;
+  border-radius: 40px;
+  color: rgba(255, 255, 255, 0.4);
+  transition: all 0.2s ease;
+}
+
+.task-filter-btn.active .task-filter-count {
+  background: rgba(74, 222, 128, 0.2);
+  color: #4ade80;
+}
+
+@media (max-width: 480px) {
+  .task-filter-glass {
+    border-radius: 24px;
+    flex-wrap: wrap;
+  }
+  .task-filter-btn {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+  .filter-icon {
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,62 @@
+/* src/styles/utilities.css */
+/* 1. SINGLE SOURCE OF TRUTH FOR FONTS */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+
+/* 2. BASE BODY STYLES */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif; /* DM Sans for everything, Syne only for headings */
+  color: white;
+  
+  /* Good fallback background if the image fails */
+  background: #0d1a12; 
+  /* Move the image here from App.css */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/src/assets/background.png');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  min-height: 100vh;
+}
+
+/* 3. SYNE UTILITY (for headings) */
+.heading-font {
+  font-family: 'Syne', sans-serif;
+}
+
+/* 4. THE MASTER GLASS UTILITY ✨ */
+.glass {
+  background: rgba(255, 255, 255, 0.13) !important; 
+  backdrop-filter: blur(20px) saturate(1.8) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(1.8) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.45) !important;
+  border-left: 1px solid rgba(255, 255, 255, 0.3) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 32px !important;
+  box-shadow: 0 2px 0 rgba(255, 255, 255, 0.22) inset, 0 20px 60px rgba(0, 0, 0, 0.18) !important;
+}
+
+/* Glass variants (for smaller cards) */
+.glass-sm {
+  border-radius: 24px !important;
+  padding: 16px 20px !important; /* Moved from Dashboard specific */
+}
+
+/* 5. SKELETON SHIMMER (moved from Dashboard.css so it can be global) */
+.skeleton-shimmer {
+  background: linear-gradient(90deg, rgba(255,255,255,0.08) 25%, rgba(255,255,255,0.18) 50%, rgba(255,255,255,0.08) 75%);
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.8s infinite;
+}
+
+@keyframes skeletonShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

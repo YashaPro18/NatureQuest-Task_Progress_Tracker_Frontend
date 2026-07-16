@@ -1,0 +1,50 @@
+/* ============================================================
+   tokens.css
+   Single source of truth for fonts, glass-morphism, and theme
+   variables. Loaded once globally (see main.jsx).
+
+   Nothing in here should change how the app currently looks —
+   every value below was copied from the existing duplicated
+   rules in Dashboard.css / TreeProgress.css / TreeHero.css.
+   ============================================================ */
+
+/* ─── Fonts (single network request, was duplicated 3x) ─── */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap');
+
+:root {
+  /* ── Font roles ──
+     App.css previously set 'Inter' globally while every page-level
+     component used DM Sans / Syne, causing font-jumping. Inter is
+     dropped; DM Sans is now the single body font app-wide. */
+  --font-body: 'DM Sans', sans-serif;
+  --font-display: 'Syne', sans-serif;
+
+  /* ── Glass morphism (was copy-pasted in Dashboard.css + TreeHero.css,
+     and re-implemented with slightly different values in TreeProgress.css) ── */
+  --glass-bg: rgba(255, 255, 255, 0.13);
+  --glass-blur: blur(20px) saturate(1.8);
+  --glass-border-top: 1px solid rgba(255, 255, 255, 0.45);
+  --glass-border-left: 1px solid rgba(255, 255, 255, 0.3);
+  --glass-border-right: 1px solid rgba(255, 255, 255, 0.15);
+  --glass-border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  --glass-radius: 32px;
+  --glass-radius-sm: 24px;
+  --glass-shadow: 0 2px 0 rgba(255, 255, 255, 0.22) inset, 0 20px 60px rgba(0, 0, 0, 0.18);
+
+  /* Skeleton shimmer (kept as variables so skeleton + real content
+     can never drift in color even if one file is edited later) */
+  --skeleton-base: rgba(255, 255, 255, 0.08);
+  --skeleton-highlight: rgba(255, 255, 255, 0.18);
+
+  /* Brand green accent, reused across progress bars / buttons / stage chips */
+  --accent-green-deep: #16a34a;
+  --accent-green: #22c55e;
+  --accent-green-light: #4ade80;
+
+  /* ── Theme background gradients (driven by ThemeContext) ──
+     Centralized here so MainLayout.css doesn't need its own
+     hardcoded gradient list. Values unchanged from MainLayout.css. */
+  --theme-forest-dark: linear-gradient(160deg, #0d1a12, #1a2e1f);
+  --theme-sunrise: linear-gradient(160deg, #2d1b0e, #6b3f1f);
+  --theme-ocean-blue: linear-gradient(160deg, #0c1e2e, #1a3a5c);
+}

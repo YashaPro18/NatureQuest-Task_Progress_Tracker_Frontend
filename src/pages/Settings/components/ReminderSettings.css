@@ -1,0 +1,105 @@
+/* src/pages/Settings/components/ReminderSettings.css */
+
+.reminder-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.reminder-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.reminder-info {
+  flex: 1;
+}
+
+.reminder-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.reminder-description {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.reminder-time {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 6px 10px;
+  color: white;
+  font-size: 13px;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.2s ease;
+}
+
+.reminder-time:focus {
+  outline: none;
+  border-color: rgba(74, 222, 128, 0.4);
+}
+
+.reminder-time:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.reminder-timezone {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.timezone-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.timezone-select {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 6px 12px;
+  color: white;
+  font-size: 13px;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+}
+
+.timezone-select:focus {
+  outline: none;
+  border-color: rgba(74, 222, 128, 0.4);
+}
+
+.timezone-select option {
+  background: #1a2e1f;
+  color: white;
+}
+
+@media (max-width: 640px) {
+  .reminder-item {
+    flex-wrap: wrap;
+  }
+  .reminder-time {
+    width: 100%;
+  }
+  .reminder-timezone {
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+  }
+}

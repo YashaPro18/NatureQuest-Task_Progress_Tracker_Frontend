@@ -1,0 +1,240 @@
+/* src/pages/TaskManager/components/AddTaskForm.css */
+.add-task-form-glass {
+  background: rgba(255, 255, 255, 0.13);
+  backdrop-filter: blur(20px) saturate(1.8);
+  border-radius: 28px;
+  padding: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.45);
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 0 rgba(255, 255, 255, 0.22) inset, 0 20px 60px rgba(0, 0, 0, 0.18);
+  transition: all 0.3s ease;
+}
+
+.add-task-form-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.add-task-form-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
+  margin: 0;
+}
+
+.add-task-close-edit {
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-task-close-edit:hover {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+}
+
+.add-task-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.add-task-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.add-task-field label {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.field-required {
+  color: #f87171;
+  margin-left: 2px;
+}
+
+.add-task-input {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 12px 16px;
+  color: white;
+  font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.2s ease;
+}
+
+.add-task-input:focus {
+  outline: none;
+  border-color: rgba(74, 222, 128, 0.5);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.1);
+}
+
+.add-task-input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.add-task-difficulty-group {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.difficulty-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 10px 8px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.difficulty-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+}
+
+.difficulty-btn.active {
+  border-color: #4ade80;
+  background: rgba(74, 222, 128, 0.15);
+  color: #4ade80;
+  box-shadow: 0 0 20px rgba(74, 222, 128, 0.05);
+}
+
+.difficulty-name {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.difficulty-xp {
+  font-size: 10px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.difficulty-btn.active .difficulty-xp {
+  color: rgba(74, 222, 128, 0.6);
+}
+
+.add-task-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.add-task-submit {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+  border: none;
+  border-radius: 16px;
+  padding: 12px 20px;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 16px rgba(34, 197, 94, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.add-task-submit::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.add-task-submit:hover::after {
+  transform: translateX(100%);
+}
+
+.add-task-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(34, 197, 94, 0.4);
+}
+
+.add-task-submit.loading {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.add-task-submit svg {
+  width: 16px;
+  height: 16px;
+}
+
+.add-task-cancel {
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.add-task-cancel:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.submit-loader {
+  display: inline-block;
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 640px) {
+  .add-task-difficulty-group {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .difficulty-btn {
+    padding: 8px 6px;
+    font-size: 11px;
+  }
+  .add-task-actions {
+    flex-direction: column;
+  }
+  .add-task-cancel {
+    width: 100%;
+  }
+}

@@ -1,0 +1,153 @@
+.tt-task {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  transition: all 0.22s ease;
+  position: relative;
+  overflow: hidden;
+  animation: taskSlideIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes taskSlideIn {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.tt-task:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.28);
+  transform: translateX(3px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+}
+
+.tt-task--done {
+  background: rgba(34, 197, 94, 0.08);
+  border-color: rgba(74, 222, 128, 0.2);
+}
+
+.tt-task--done:hover {
+  background: rgba(34, 197, 94, 0.13);
+  border-color: rgba(74, 222, 128, 0.35);
+}
+
+/* ─── Priority stripe ─── */
+.tt-task-stripe {
+  position: absolute;
+  left: 0;
+  top: 10px;
+  bottom: 10px;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  opacity: 0.75;
+  transition: opacity 0.2s;
+}
+
+.tt-task:hover .tt-task-stripe { opacity: 1; }
+.tt-task--done .tt-task-stripe { opacity: 0.35; }
+
+/* ─── Checkbox ─── */
+.tt-check-wrap {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.tt-check-input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  width: 0;
+  height: 0;
+}
+
+.tt-checkmark {
+  width: 22px;
+  height: 22px;
+  border-radius: 7px;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.tt-checkmark--done {
+  background: linear-gradient(135deg, #15803d, #22c55e);
+  border-color: #22c55e;
+  box-shadow: 0 2px 12px rgba(34, 197, 94, 0.4);
+}
+
+/* ─── Task body ─── */
+.tt-task-body {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.tt-task-title {
+  flex: 1;
+  font-size: 14.5px;
+  font-weight: 450;
+  color: rgba(255, 255, 255, 0.88);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.18);
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: all 0.2s ease;
+}
+
+.tt-task--done .tt-task-title {
+  text-decoration: line-through;
+  color: rgba(255, 255, 255, 0.38);
+}
+
+/* ─── Priority pill ─── */
+.tt-priority-pill {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 3px 9px;
+  border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: opacity 0.2s;
+}
+
+.tt-task--done .tt-priority-pill { opacity: 0.4; }
+
+/* ─── Done badge ─── */
+.tt-task-done-badge {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: rgba(74, 222, 128, 0.12);
+  border: 1px solid rgba(74, 222, 128, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+  .tt-task {
+    padding: 12px 14px;
+  }
+  .tt-task-title {
+    font-size: 13.5px;
+  }
+  .tt-priority-pill {
+    display: none;
+  }
+}

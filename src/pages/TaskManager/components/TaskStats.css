@@ -1,0 +1,41 @@
+/* src/pages/TaskManager/components/TaskStats.css */
+.task-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+  animation: fadeUp 0.5s ease-out 0.05s backwards;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── Stat Card Hover Enhancement ─── */
+.task-stats-grid .stat-card-glass {
+  transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+
+.task-stats-grid .stat-card-glass:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 640px) {
+  .task-stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .task-stats-grid {
+    grid-template-columns: 1fr;
+  }
+}

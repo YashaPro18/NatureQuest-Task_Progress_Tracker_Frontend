@@ -1,0 +1,96 @@
+/* src/layouts/MainLayout.css */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&display=swap');
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.15) transparent;
+}
+
+.main-layout {
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Green tint overlay – works for all themes */
+.main-layout::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    160deg,
+    rgba(0, 30, 10, 0.08) 0%,
+    rgba(0, 10, 4, 0.12) 60%,
+    rgba(0, 20, 8, 0.18) 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.main-content {
+  position: relative;
+  z-index: 1;
+  margin-left: 104px;
+  padding-top: 108px;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-bottom: 40px;
+  min-height: 100vh;
+}
+
+/* ─── Theme variants ─── */
+
+/* Nature Green (with background image) */
+.main-layout.theme-nature-green {
+  background-image: url("../assets/background.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* Forest Dark (solid dark) */
+.main-layout.theme-forest-dark {
+  background-image: none;
+  background: linear-gradient(160deg, #0d1a12, #1a2e1f);
+}
+
+/* Sunrise (warm tones) */
+.main-layout.theme-sunrise {
+  background-image: none;
+  background: linear-gradient(160deg, #2d1b0e, #6b3f1f);
+}
+
+/* Ocean Blue */
+.main-layout.theme-ocean-blue {
+  background-image: none;
+  background: linear-gradient(160deg, #0c1e2e, #1a3a5c);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 1024px) {
+  .main-content {
+    margin-left: 88px;
+    padding-top: 100px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+    padding-top: 88px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    padding-top: 76px;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-bottom: 72px;
+  }
+}  

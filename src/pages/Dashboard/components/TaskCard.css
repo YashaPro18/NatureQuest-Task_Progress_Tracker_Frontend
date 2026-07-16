@@ -1,0 +1,152 @@
+/* TaskCard.css – Premium Style (FIXED) */
+
+.task-card-glass {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: all 0.25s ease;
+  animation: fadeSlide 0.3s ease backwards;
+  /* ─── FIX: Force GPU layer ─── */
+  will-change: transform, backdrop-filter;   /* ADDED */
+  transform: translateZ(0);                 /* ADDED */
+}
+
+.task-card-glass:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateX(4px);
+}
+
+.task-card-glass.completed {
+  background: rgba(34, 197, 94, 0.08);
+  border-color: rgba(74, 222, 128, 0.2);
+}
+
+/* ─── Read-only Task Card ─── */
+.task-card-glass.read-only {
+  cursor: pointer;
+}
+
+.task-card-glass.read-only:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateX(4px);
+}
+
+.task-card-glass.read-only:active {
+  transform: scale(0.98);
+}
+
+/* ─── Status Indicator ─── */
+.task-status-indicator {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.task-status-indicator.pending {
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.task-status-indicator.done {
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+  color: white;
+  border: none;
+  box-shadow: 0 2px 12px rgba(34, 197, 94, 0.3);
+}
+
+/* ─── Task Content ─── */
+.task-card-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.task-card-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.92);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.task-card-glass.completed .task-card-title {
+  text-decoration: line-through;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.task-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.task-card-difficulty {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 40px;
+  text-transform: uppercase;
+}
+
+.task-card-xp {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.task-card-xp svg {
+  color: #4ade80;
+}
+
+/* ─── Click Hint ─── */
+.task-click-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.task-card-glass.read-only:hover .task-click-hint {
+  opacity: 1;
+}
+
+.task-click-hint svg {
+  width: 16px;
+  height: 16px;
+  color: rgba(255, 255, 255, 0.2);
+}
+
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 480px) {
+  .task-card-glass {
+    padding: 12px 14px;
+  }
+  .task-card-title {
+    font-size: 14px;
+  }
+  .task-click-hint {
+    display: none;
+  }
+}

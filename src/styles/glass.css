@@ -1,0 +1,53 @@
+/* ============================================================
+   glass.css
+   One glass-morphism utility, derived from tokens.css.
+
+   Replaces the duplicated !important block that previously lived
+   in Dashboard.css (applied via a multi-selector list) and the
+   near-identical block hardcoded in TreeHero.css.
+
+   No !important here on purpose: components opt in with the
+   `.glass-card` class, and the natural cascade means hover states,
+   error variants, etc. can override individual properties later
+   without specificity hacks. Apply `.glass-card` alongside a
+   component's own class, e.g. <div className="tree-hero-card glass-card">
+   ============================================================ */
+
+@import './tokens.css';
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-top: var(--glass-border-top);
+  border-left: var(--glass-border-left);
+  border-right: var(--glass-border-right);
+  border-bottom: var(--glass-border-bottom);
+  border-radius: var(--glass-radius);
+  box-shadow: var(--glass-shadow);
+}
+
+/* Smaller-radius variant — used by stat cards, which previously
+   had to redeclare border-radius after the !important block. */
+.glass-card--sm {
+  border-radius: var(--glass-radius-sm);
+}
+
+/* Shared skeleton shimmer, used by every skeleton-* element across
+   Dashboard.css. Centralized so skeleton color always matches
+   --skeleton-base / --skeleton-highlight if those ever change. */
+.skeleton-shimmer {
+  background: linear-gradient(90deg, var(--skeleton-base) 25%, var(--skeleton-highlight) 50%, var(--skeleton-base) 75%);
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.8s infinite;
+}
+
+@keyframes skeletonShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes skeletonPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}

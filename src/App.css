@@ -1,0 +1,10 @@
+body {
+  margin: 0;
+  padding: 0;
+  /* Add a dark overlay to make the glass effect visible */
+  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('your-background.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  font-family: 'Inter', sans-serif;
+  color: white;
+}
