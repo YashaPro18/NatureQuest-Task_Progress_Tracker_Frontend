@@ -37,32 +37,39 @@
   min-height: 100vh;
 }
 
-/* ─── Theme variants ─── */
-
-/* Nature Green (with background image) */
-.main-layout.theme-nature-green {
-  background-image: url("../assets/background.png");
+/* ─── Fixed background layer ───
+   Uses position:fixed on a dedicated layer instead of
+   background-attachment:fixed on .main-layout itself. iOS Safari has a
+   long-standing bug where backdrop-filter fails to sample correctly when
+   the element behind it uses background-attachment:fixed — the fixed
+   background gets composited in a way backdrop-filter can't read from,
+   so every glass card renders as a flat, unblurred fill instead of
+   translucent. position:fixed on a separate element doesn't trigger this;
+   it achieves the identical "background stays put while content scrolls"
+   effect through a different rendering path. */
+.main-layout::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
   background-size: cover;
-  background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-position: center;
 }
 
-/* Forest Dark (solid dark) */
-.main-layout.theme-forest-dark {
-  background-image: none;
+.main-layout.theme-nature-green::after {
+  background-image: url("../assets/background.png");
+}
+
+.main-layout.theme-forest-dark::after {
   background: linear-gradient(160deg, #0d1a12, #1a2e1f);
 }
 
-/* Sunrise (warm tones) */
-.main-layout.theme-sunrise {
-  background-image: none;
+.main-layout.theme-sunrise::after {
   background: linear-gradient(160deg, #2d1b0e, #6b3f1f);
 }
 
-/* Ocean Blue */
-.main-layout.theme-ocean-blue {
-  background-image: none;
+.main-layout.theme-ocean-blue::after {
   background: linear-gradient(160deg, #0c1e2e, #1a3a5c);
 }
 
@@ -84,6 +91,15 @@
     padding-right: 16px;
     padding-bottom: 80px;
   }
+
+  /* The source background image (2880×2048) is landscape with its most
+     characteristic feature — the tree canopy — anchored top-left.
+     On a portrait viewport, cover-cropping from center loses the tree
+     almost entirely and leaves mostly plain sky. Shifting the anchor
+     keeps it in frame. */
+  .main-layout::after {
+    background-position: left top;
+  }
 }
 
 @media (max-width: 480px) {
@@ -93,4 +109,4 @@
     padding-right: 12px;
     padding-bottom: 72px;
   }
-}  
+}

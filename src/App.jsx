@@ -4,6 +4,7 @@ import { AuthProvider } from './context/AuthContext';
 import { ThemeProvider } from './context/ThemeContext';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import MainLayout from './layouts/MainLayout';
+import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 import Dashboard from './pages/Dashboard/Dashboard';
 import TaskTracker from './pages/TaskTracker/TaskTracker';
 import TaskManager from './pages/TaskManager/TaskManager';
@@ -20,6 +21,7 @@ function App() {
   return (
     <BrowserRouter>
         <ThemeProvider> 
+          <ScrollToTop />
         <Routes>
           {/* Public routes */}
           <Route path="/login" element={<Login />} />

@@ -7,11 +7,11 @@ import DailyStats from './components/DailyStats';
 import TodayTaskList from './components/TodayTaskList';
 import FooterNote from './components/FooterNote';
 import ToastMessage from '../TaskManager/components/ToastMessage';
-import plantImage from '../../assets/Parts/Lush_green_plant.png'; 
-import './Dashboard.css';  // 👈 cache busting
+import plantImage from '../../assets/Parts/Lush_green_plant.png';
+import './Dashboard.css';
 import API_URL from "../../config/api";
 
-// ─── Helper: Get stage based on progress ───
+// ─── Helper: Get stage based on progress (today's completion %) ───
 const getStageByProgress = (progress) => {
   const stages = [
     { name: "Seed", minProgress: 0 },
@@ -41,7 +41,6 @@ const getLevelByProgress = (progress) => {
 // ─── Premium Skeleton Component ───
 const DashboardSkeleton = () => (
   <div className="dashboard-skeleton">
-    {/* Hero Skeleton */}
     <div className="skeleton-hero-card">
       <div className="skeleton-hero-header">
         <div className="skeleton-line skeleton-line-sm"></div>
@@ -61,16 +60,12 @@ const DashboardSkeleton = () => (
         <div className="skeleton-bar"></div>
       </div>
     </div>
-
-    {/* Stats Skeleton */}
     <div className="skeleton-stats-grid">
       <div className="skeleton-stat-card"></div>
       <div className="skeleton-stat-card"></div>
       <div className="skeleton-stat-card"></div>
       <div className="skeleton-stat-card"></div>
     </div>
-
-    {/* Quick Action Skeleton */}
     <div className="skeleton-quick-action">
       <div className="skeleton-quick-content">
         <div className="skeleton-circle-small"></div>
@@ -81,8 +76,6 @@ const DashboardSkeleton = () => (
       </div>
       <div className="skeleton-btn"></div>
     </div>
-
-    {/* Tasks Skeleton */}
     <div className="skeleton-tasks-card">
       <div className="skeleton-tasks-header">
         <div className="skeleton-line skeleton-line-lg"></div>
@@ -103,6 +96,7 @@ function Dashboard() {
   const { user, token } = useAuth();
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [fetchError, setFetchError] = useState(false);
   const [toast, setToast] = useState(null);
 
   const showToast = (message, type = 'error') => {
@@ -111,23 +105,28 @@ function Dashboard() {
   };
 
   // ─── Fetch today's tasks ───
+  const fetchTasks = async () => {
+    if (!token) return;
+    setFetchError(false);
+    setLoading(true);
+    try {
+      const response = await fetch(`${API_URL}/tasks`, {
+        headers: { 'Authorization': `Bearer ${token}` },
+      });
+      if (!response.ok) throw new Error('Failed to fetch tasks');
+      const data = await response.json();
+      setTasks(data);
+    } catch (error) {
+      setFetchError(true);
+      showToast('Failed to load tasks', 'error');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchTasks = async () => {
-      if (!token) return;
-      try {
-        const response = await fetch(`${API_URL}/tasks`, {
-          headers: { 'Authorization': `Bearer ${token}` },
-        });
-        if (!response.ok) throw new Error('Failed to fetch tasks');
-        const data = await response.json();
-        setTasks(data);
-      } catch (error) {
-        showToast('Failed to load tasks', 'error');
-      } finally {
-        setLoading(false);
-      }
-    };
     fetchTasks();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
   // ─── Compute stats from tasks ───
@@ -137,8 +136,10 @@ function Dashboard() {
   const todayXp = tasks.reduce((sum, t) => t.completed ? sum + t.xp : sum, 0);
   const totalTodayXp = tasks.reduce((sum, t) => sum + t.xp, 0);
 
+  // ★ FIXED: Use today's progress to determine level and stage
   const progressLevel = getLevelByProgress(progress);
   const progressStage = getStageByProgress(progress);
+
   const treeData = {
     level: progressLevel,
     stage: progressStage.name,
@@ -146,6 +147,7 @@ function Dashboard() {
     xpToNext: totalTodayXp,
     progress: progress,
   };
+
   const dailyStats = {
     todayXp: todayXp,
     completedTasks: completedTasks,
@@ -163,53 +165,52 @@ function Dashboard() {
   }
 
   return (
-        <div className="dashboard-root">
+    <div className="dashboard-root">
       <div className="dashboard-grid">
-        {/* LEFT: TreeHero – Slide from LEFT */}
         <div className="dashboard-hero animate-slide-left">
           <TreeHero treeData={treeData} />
         </div>
 
-        {/* RIGHT: DailyStats – Slide from RIGHT */}
         <div className="dashboard-stats animate-slide-right">
           <DailyStats stats={dailyStats} />
 
-          {/* ─── UPDATED Quick Action ─── */}
           <div className="dashboard-quick-action animate-fade-up">
-
-    <img
-        src={plantImage}
-        alt=""
-        className="quick-action-plant-bg"
-    />
-
-    <div className="quick-action-content">
-
-        <div className="quick-action-text">
-            <h3 className="quick-action-title">
-                Focus Mode
-            </h3>
-
-            <p className="quick-action-desc">
-                Complete your daily tasks and watch your tree grow.
-            </p>
-        </div>
-
-        <button
-            className="quick-action-btn"
-            onClick={() => navigate("/tasks")}
-        >
-            Go to Task Tracker →
-        </button>
-
-    </div>
-
-</div>
+            <img
+              src={plantImage}
+              alt=""
+              className="quick-action-plant-bg"
+            />
+            <div className="quick-action-content">
+              <div className="quick-action-text">
+                <h3 className="quick-action-title">Focus Mode</h3>
+                <p className="quick-action-desc">
+                  Complete your daily tasks and watch your tree grow.
+                </p>
+              </div>
+              <button
+                className="quick-action-btn"
+                onClick={() => navigate("/tasks")}
+              >
+                Go to Task Tracker →
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
       <div className="dashboard-tasks-section animate-fade-up-delayed">
-        <TodayTaskList tasks={tasks} />
+        {fetchError ? (
+          <div className="dashboard-fetch-error glass-card">
+            <span className="fetch-error-icon">⚠️</span>
+            <h3>Couldn't load your tasks</h3>
+            <p>Check your connection and try again.</p>
+            <button className="fetch-error-retry" onClick={fetchTasks}>
+              Retry
+            </button>
+          </div>
+        ) : (
+          <TodayTaskList tasks={tasks} />
+        )}
       </div>
 
       <FooterNote />

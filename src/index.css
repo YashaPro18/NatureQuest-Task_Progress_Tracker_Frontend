@@ -15,10 +15,16 @@ body {
   font-family: 'DM Sans', sans-serif;
   color: white;
   background: #0d1a12;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/src/assets/background.png');
+  /* was url('/src/assets/background.png') — an absolute /src path only
+     resolves on Vite's dev server; it 404s after `vite build` since /src
+     doesn't exist in the production output. Relative path lets Vite
+     rewrite it correctly at build time. */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('./assets/background.png');
   background-size: cover;
-  background-attachment: fixed;
   background-position: center;
+  /* background-attachment:fixed removed — see MainLayout.css for why:
+     it breaks backdrop-filter on iOS Safari, which is what was making
+     glass cards render opaque on mobile. */
   min-height: 100vh;
 }
 

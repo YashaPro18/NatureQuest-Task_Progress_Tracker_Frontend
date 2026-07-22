@@ -21,13 +21,14 @@ const frames = [
 function TreeHero({ treeData }) {
   const { level, stage, xp, xpToNext, progress } = treeData;
 
-  const getFrameIndex = (progress) => {
-    if (progress === 0) return 0;
-    return Math.min(9, Math.floor((progress / 100) * 10));
-  };
-
-  const frameIndex = getFrameIndex(progress);
+  // Frame is chosen by real account level (1–10), not today's task
+  // completion — so the tree visual always agrees with the "Level" badge
+  // and with what Profile shows for this same account.
+  const frameIndex = Math.min(9, Math.max(0, level - 1));
   const treeImage = frames[frameIndex] || Frame1;
+
+  // `progress` is today-only (completed / total tasks today) — used just
+  // for the "Today's Progress" bar and stat below, never for the tree image.
   const progressPercent = Math.round(progress);
 
   return (
@@ -55,7 +56,7 @@ function TreeHero({ treeData }) {
         <div className="tree-hero-stat-divider"></div>
         <div className="tree-hero-stat">
           <span className="tree-hero-stat-value">{progressPercent}%</span>
-          <span className="tree-hero-stat-label">Progress</span>
+          <span className="tree-hero-stat-label">Today</span>
         </div>
       </div>
 

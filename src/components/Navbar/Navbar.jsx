@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import "./Navbar.css";
 
-function Navbar() {
+function Navbar({ onMenuClick }) {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
 
@@ -18,6 +18,18 @@ function Navbar() {
 
   return (
     <header className="navbar">
+      {/* Mobile-only menu button — opens the Sidebar drawer. Hidden on
+          desktop via CSS, since Sidebar's own toggle handles that there. */}
+      <button
+        className="navbar-menu-btn"
+        onClick={onMenuClick}
+        aria-label="Open menu"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+          <path d="M3 6h18M3 12h18M3 18h18" strokeLinecap="round" />
+        </svg>
+      </button>
+
       <div className="navbar-left">
         <div className="project-badge">
           <span className="badge-initials">TG</span>

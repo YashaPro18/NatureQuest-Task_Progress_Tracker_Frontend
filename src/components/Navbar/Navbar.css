@@ -319,184 +319,167 @@
 }
 
 
+
+/* ─── Mobile menu button ───
+   Hidden on desktop (Sidebar has its own toggle there). On mobile this
+   is the ONLY way to open the sidebar drawer — previously that toggle
+   lived exclusively inside Sidebar itself, which sits off-canvas by
+   default on mobile, so it was unreachable. */
+.navbar-menu-btn {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-right: 10px;
+}
+
+.navbar-menu-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.navbar-menu-btn:active {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* ════════════════════════════════════════════════════
+   RESPONSIVE
+   Mobile isn't a shrunk desktop bar — it's a distinct
+   compact layout: menu button + compact logo mark on the
+   left, notification + profile avatar only on the right,
+   search and full name/role text dropped entirely (search
+   lives in the mobile bottom nav / a future dedicated view;
+   name+role already show on Profile, so aren't needed twice).
+   ════════════════════════════════════════════════════ */
+
+@media (max-width: 1024px) {
+  .navbar-center { flex: 0.6; }
+  .project-title { font-size: 16px; }
+  .profile-text { display: none; }
+  .profile-btn { gap: 6px; }
+}
+
 @media (max-width: 768px) {
-  .navbar-center {
-    display: none; /* Hide search bar on mobile */
+  .navbar {
+    left: 12px;
+    right: 12px;
+    top: 12px;
+    height: 60px;
+    padding: 0 10px;
+    border-radius: 18px;
   }
 
-  .navbar-right .profile-text {
-    display: none; /* Hide name and role on mobile */
+  .navbar-menu-btn {
+    display: flex;
   }
 
-  .navbar-right .divider {
-    display: none;
+  .navbar-left {
+    min-width: 0;
+    gap: 8px;
+    flex: 1;
   }
 
-  .navbar-right .logout-btn {
-    margin-left: 4px;
-    padding: 6px;
+  .project-badge {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
   }
 
-  .navbar-right .logout-btn svg {
-    width: 18px;
-    height: 18px;
+  .badge-initials { font-size: 11px; }
+
+  .project-title {
+    font-size: 13.5px;
   }
 
-  .navbar-right .notif-btn {
-    display: none; /* Or keep if you want */
+  /* Subtitle ("Impact Dashboard") is redundant chrome at this size —
+     the badge + title alone identify the app; dropping it keeps the
+     bar to one clean row instead of a cramped two-line stack. */
+  .project-subtitle { display: none; }
+
+  .navbar-center { display: none; }
+
+  .navbar-right {
+    gap: 6px;
+    min-width: 0;
   }
 
-  .navbar-left .project-info .project-subtitle {
-    display: none;
-  }
-
-  .navbar-left .project-info .project-title {
-    font-size: 16px;
-  }
-
-  .navbar-left .project-badge {
+  /* Notification bell is restored here — it was fully hidden on mobile
+     before, meaning there was no way to see notifications on a phone
+     at all. It's compact but present. */
+  .notif-btn {
+    display: flex;
     width: 36px;
     height: 36px;
   }
+  .notif-btn svg { width: 17px; height: 17px; }
+  .notif-badge {
+    top: 5px;
+    right: 5px;
+    width: 7px;
+    height: 7px;
+  }
 
-  .navbar-left .project-badge .badge-initials {
-    font-size: 12px;
+  .divider { display: none; }
+
+  .profile-text { display: none; }
+  .chevron { display: none; }
+
+  .profile-btn {
+    padding: 0;
+    width: 36px;
+    height: 36px;
+    justify-content: center;
+    border-radius: 10px;
   }
 
   .profile-avatar {
-    width: 32px;
-    height: 32px;
-    font-size: 14px;
-  }
-
-  .navbar {
-    padding: 8px 12px;
-  }
-}
-
-@media (max-width: 480px) {
-  .navbar-left .project-info .project-title {
-    font-size: 14px;
-  }
-
-  .navbar-left .project-badge {
     width: 30px;
     height: 30px;
+    font-size: 12px;
   }
 
-  .navbar-left .project-badge .badge-initials {
-    font-size: 10px;
+  .logout-btn {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    margin-left: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
+  .logout-btn svg { width: 17px; height: 17px; }
 }
 
-/* ─── Navbar Responsive ─── */
-
-/* Tablet */
-@media (max-width: 1024px) {
-  .navbar-center {
-    flex: 0.6;
-  }
-  .project-title {
-    font-size: 16px;
-  }
-  .profile-text {
-    display: none;
-  }
-  .profile-btn {
-    gap: 6px;
-  }
-}
-
-/* Mobile */
-@media (max-width: 768px) {
+@media (max-width: 480px) {
   .navbar {
-    padding: 10px 16px;
-    height: 64px;
-  }
-  .navbar-left {
-    gap: 10px;
+    height: 56px;
+    left: 10px;
+    right: 10px;
+    top: 10px;
   }
   .project-badge {
+    width: 28px;
+    height: 28px;
+  }
+  .badge-initials { font-size: 10px; }
+  .project-title { font-size: 12.5px; }
+  .navbar-menu-btn,
+  .notif-btn,
+  .profile-btn,
+  .logout-btn {
     width: 32px;
     height: 32px;
   }
-  .badge-initials {
-    font-size: 12px;
-  }
-  .project-title {
-    font-size: 14px;
-  }
-  .project-subtitle {
-    font-size: 10px;
-  }
-  .navbar-center {
-    display: none; /* Hide search on mobile */
-  }
-  .navbar-right {
-    gap: 8px;
-  }
-  .profile-btn {
-    padding: 4px 8px;
-  }
   .profile-avatar {
-    width: 28px;
-    height: 28px;
-    font-size: 12px;
-  }
-  .profile-text {
-    display: none;
-  }
-  .chevron {
-    display: none;
-  }
-  .notif-btn {
-    padding: 4px;
-  }
-  .notif-btn svg {
-    width: 20px;
-    height: 20px;
-  }
-  .notif-badge {
-    font-size: 9px;
-    min-width: 16px;
-    height: 16px;
-    top: 0;
-    right: 0;
-  }
-  .logout-btn {
-    padding: 4px;
-  }
-  .logout-btn svg {
-    width: 18px;
-    height: 18px;
-  }
-  .divider {
-    display: none;
-  }
-}
-
-/* Very small */
-@media (max-width: 480px) {
-  .navbar {
-    padding: 8px 12px;
-    height: 56px;
-  }
-  .project-title {
-    font-size: 12px;
-  }
-  .project-subtitle {
-    display: none;
-  }
-  .project-badge {
-    width: 28px;
-    height: 28px;
-  }
-  .badge-initials {
-    font-size: 10px;
-  }
-  .profile-avatar {
-    width: 24px;
-    height: 24px;
-    font-size: 10px;
+    width: 26px;
+    height: 26px;
+    font-size: 11px;
   }
 }

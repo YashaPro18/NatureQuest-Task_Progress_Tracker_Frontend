@@ -48,3 +48,17 @@
   --theme-sunrise: linear-gradient(160deg, #2d1b0e, #6b3f1f);
   --theme-ocean-blue: linear-gradient(160deg, #0c1e2e, #1a3a5c);
 }
+
+/* ── Mobile glass tuning ──
+   Lighter blur radius on small viewports: mobile GPUs render
+   backdrop-filter far more expensively than desktop, and heavy blur was
+   part of what made Safari silently drop the effect under load. This
+   keeps the same visual language at a cheaper cost, and pairs with the
+   background-attachment:fixed fix in MainLayout.css/index.css. */
+@media (max-width: 768px) {
+  :root {
+    --glass-blur: blur(14px) saturate(1.6);
+    --glass-radius: 24px;
+    --glass-radius-sm: 18px;
+  }
+}

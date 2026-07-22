@@ -1,5 +1,4 @@
 // src/components/Sidebar/Sidebar.jsx
-import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import {
   FiMenu,
@@ -21,9 +20,7 @@ const NAV_ITEMS = [
   { to: "/settings",       icon: FiSettings,    label: "Settings"       },
 ];
 
-function Sidebar() {
-  const [expanded, setExpanded] = useState(false);
-
+function Sidebar({ expanded, setExpanded }) {
   return (
     <>
       {/* Overlay for mobile */}
